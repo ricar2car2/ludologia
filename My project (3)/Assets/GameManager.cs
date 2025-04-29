@@ -5,17 +5,35 @@ using TMPro;
 
 public class GameManager : MonoBehaviour
 {
-   public static List<int> collectedItems = new List <int>();
-   public RectTransform nameTag;
+    public static GameManager Instance { get; private set; }
 
+    public static List<int> collectedItems = new List<int>();
+    public RectTransform nameTag;
+    public ItemData currentItemShown;
 
-   public void UpdateNameTag(ItemData item)
+    private void Awake()
+    {
+        // Asegura que solo exista una instancia
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
+
+        Instance = this;
+    }
+
+    public void UpdateNameTag(ItemData item)
 {
-    nameTag.GetComponentInChildren<TextMeshProUGUI>().text =item.objectName;
+    currentItemShown = item;
 
+    nameTag.gameObject.SetActive(true); // <- Asegura que esté visible
+
+    nameTag.GetComponentInChildren<TextMeshProUGUI>().text = item.objectName;
     nameTag.sizeDelta = item.namTagSize;
+    nameTag.localPosition = new Vector2(item.namTagSize.x / 2, -0.4f);
+}
 
-    nameTag.localPosition= new Vector2(item.namTagSize.x/2,-0.5f);
 }
-}
+
 

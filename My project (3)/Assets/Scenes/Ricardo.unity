@@ -283,6 +283,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nameTag: {fileID: 2113948824}
+  currentItemShown: {fileID: 0}
 --- !u!1 &129429378
 GameObject:
   m_ObjectHideFlags: 0
@@ -973,6 +974,8 @@ MonoBehaviour:
   requiredItemID: -1
   objectsToRemove:
   - {fileID: 966178042}
+  - {fileID: 1224147331}
+  - {fileID: 1224147331}
   objectName: La Capsula
   namTagSize: {x: 3, y: 0.65}
 --- !u!1 &1016831848
