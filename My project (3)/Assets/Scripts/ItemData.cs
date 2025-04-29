@@ -5,5 +5,5 @@ using System.Collections.Generic;
 public class ItemData : MonoBehaviour
 {
     public int itemID, requiredItemID;
-   
+    public GameObject[] objectsToRemove;
 }
