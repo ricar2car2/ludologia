@@ -6,13 +6,22 @@ using TMPro;
 public class clickManager : MonoBehaviour
 {
 
-    
+    GameManager gameManager;
+    private void Start()
+    {
+        gameManager= FindFirstObjectByType<GameManager>();
+    }
+
     public void ClickReaction(ItemData item)
     {
         bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item.requiredItemID);
         if (canGetItem)
         {
             StartCoroutine(HandleItemClick(item));
+        }
+        else
+        {
+            gameManager.UpdateHintBox(item);
         }
     }
 
@@ -29,9 +38,9 @@ public class clickManager : MonoBehaviour
   private IEnumerator UpdateSceneAfterAction(ItemData item)
 {
     // Oculta la nametag si corresponde
-    if (GameManager.Instance.currentItemShown == item)
+    if (gameManager.currentItemShown == item)
     {
-        GameManager.Instance.nameTag.gameObject.SetActive(false);
+        gameManager.nameTag.gameObject.SetActive(false);
     }
 
     foreach (GameObject g in item.objectsToRemove)
