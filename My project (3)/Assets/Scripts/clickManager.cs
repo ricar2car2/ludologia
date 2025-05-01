@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.ComponentModel.Design;
 
 public class clickManager : MonoBehaviour
 {
@@ -43,6 +44,8 @@ public class clickManager : MonoBehaviour
     else
     {
         gameManager.UpdateHintBox(item);
+        gameManager.CheckSpecialConditions(item);
+
     }
 }
 
@@ -64,11 +67,12 @@ public class clickManager : MonoBehaviour
         {
             gameManager.nameTag.gameObject.SetActive(false);
         }
+       
 
         foreach (GameObject g in item.objectsToRemove)
         {
             Destroy(g);
-        }
+        }        
 
         Debug.Log("Coleccionado");
         yield return null;
