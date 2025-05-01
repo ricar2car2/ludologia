@@ -2,21 +2,29 @@ using UnityEngine;
 
 public class NameTag : MonoBehaviour
 {
-    Vector2 resolution, resolutionInWorldUnits = new Vector2(15.96f,10);
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public Camera uiCamera; // Asigna tu Main Camera
+    public Canvas nameTagCanvas; // Asigna el NameTag Canvas (World Space)
+
+    private RectTransform rectTransform;
+
+    private void Start()
     {
-        resolution= new Vector2 (Screen.width, Screen.height);
+        rectTransform = GetComponent<RectTransform>();
     }
 
-    // Update is called once per frame
-    void LateUpdate()
+    private void LateUpdate()
     {
-        FollowMouse();
-    }
+        Vector2 mousePos = Input.mousePosition;
+        Vector3 worldPos;
 
-    private void FollowMouse()
-    {
-        transform.position= Input.mousePosition/resolution * resolutionInWorldUnits;
+        // Convertir la posición del mouse en pantalla a posición en el mundo del canvas
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            nameTagCanvas.transform as RectTransform,
+            mousePos,
+            uiCamera,
+            out worldPos
+        );
+
+        rectTransform.position = worldPos;
     }
 }

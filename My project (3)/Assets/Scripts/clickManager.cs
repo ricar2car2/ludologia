@@ -24,20 +24,28 @@ public class clickManager : MonoBehaviour
             {
                 gameManager.currentItemShown = null;
                 gameManager.hintBox.gameObject.SetActive(false);
+
             }
         }
     }
 
     public void ClickReaction(ItemData item)
+{
+    bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item.requiredItemID);
+
+    if (canGetItem)
+    {
+        // IMPORTANTE: marcar este como el último item mostrado (por si no se hizo hover antes)
+        gameManager.currentItemShown = item;
+
+        StartCoroutine(HandleItemClick(item));
+    }
+    else
     {
         gameManager.UpdateHintBox(item);
-        bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item.requiredItemID);
-        if (canGetItem)
-        {
-            StartCoroutine(HandleItemClick(item));
-        }
-        
     }
+}
+
 
     private IEnumerator HandleItemClick(ItemData item)
     {

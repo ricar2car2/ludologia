@@ -23,15 +23,21 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
-    public void UpdateNameTag(ItemData item)
+   public void UpdateNameTag(ItemData item)
     {
+        if (currentItemShown == item && nameTag.gameObject.activeSelf)
+            return; // Evita recalcular si ya está activo con el mismo item
+
         currentItemShown = item;
-        nameTag.gameObject.SetActive(true); // <- Asegura que esté visible
+        nameTag.gameObject.SetActive(true);
 
         nameTag.GetComponentInChildren<TextMeshProUGUI>().text = item.objectName;
-        nameTag.sizeDelta = item.namTagSize;
-        nameTag.localPosition = new Vector2(item.namTagSize.x / 2, -0.4f);
+
+        nameTag.sizeDelta = item.namTagSize; // Esto solo si el tamaño es fijo por item
+        nameTag.localPosition = new Vector2(item.namTagSize.x / 2, -0.4f); // Este offset puede causar salto si es relativo al tamaño
     }
+
+
     public void UpdateHintBox(ItemData item)
     {
         if (item == null)
