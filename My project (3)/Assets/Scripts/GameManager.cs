@@ -34,20 +34,17 @@ public class GameManager : MonoBehaviour
     }
     public void UpdateHintBox(ItemData item)
     {
-        if(item ==null)
+        if (item == null)
         {
             hintBox.gameObject.SetActive(false);
             return;
         }
 
         hintBox.gameObject.SetActive(true);
-
-        currentItemShown = item;
         hintBox.GetComponentInChildren<TextMeshProUGUI>().text = item.hintMessage;
         hintBox.sizeDelta = item.hintBoxSize;
-        hintBox.parent.localPosition = new Vector2(2, -0.4f);
+        hintBox.localPosition = new Vector2(0, -0.4f);
     }
-
 }
 
 

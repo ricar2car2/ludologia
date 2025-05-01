@@ -10,5 +10,6 @@ public class ItemData : MonoBehaviour
     public Vector2 namTagSize= new Vector2(3,0.65f);
     [TextArea(3,3)]
     public string hintMessage;
+        
     public Vector2 hintBoxSize= new Vector2(4,0.65f);
 }
