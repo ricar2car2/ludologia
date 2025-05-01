@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour
         hintBox.gameObject.SetActive(true);
         hintBox.GetComponentInChildren<TextMeshProUGUI>().text = item.hintMessage;
         hintBox.sizeDelta = item.hintBoxSize;
-        hintBox.localPosition = new Vector2(0, -0.4f);
+        hintBox.localPosition = new Vector2(0, -3f);
     }
 }
 
