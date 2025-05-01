@@ -30,15 +30,13 @@ public class clickManager : MonoBehaviour
 
     public void ClickReaction(ItemData item)
     {
+        gameManager.UpdateHintBox(item);
         bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item.requiredItemID);
         if (canGetItem)
         {
             StartCoroutine(HandleItemClick(item));
         }
-        else
-        {
-            gameManager.UpdateHintBox(item);
-        }
+        
     }
 
     private IEnumerator HandleItemClick(ItemData item)
