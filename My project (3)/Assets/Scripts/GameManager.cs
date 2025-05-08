@@ -10,11 +10,14 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
 
     public static List<int> collectedItems = new List<int>();
+    [Header("Setup")]
     public RectTransform nameTag, hintBox;
     public ItemData currentItemShown;
+    [Header("Local Scenes")]
 
     public Image blockingImage;
     public GameObject[] localScenes;
+    int activeLocalScene=0;
 
     private void Awake()
     {
@@ -66,7 +69,7 @@ public class GameManager : MonoBehaviour
                 break;
             case -21:
             //de escena 2 a escena 1
-            StartCoroutine(ChangeScene(2,0));
+            StartCoroutine(ChangeScene(0,0));
                 break;  
             case -1:
             //victoria magistral. Final del juego ganaste
@@ -76,8 +79,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ChangeScene (int sceneNumber, float Delay){
+    public IEnumerator ChangeScene (int sceneNumber, float delay){
+
+        yield return new WaitForSeconds(delay);
         Color c=blockingImage.color;
+        blockingImage.enabled = true;
         while(blockingImage.color.a<1)
         {
             c.a+=Time.deltaTime;
@@ -86,11 +92,20 @@ public class GameManager : MonoBehaviour
         }
         Debug.Log("test");
 
+        localScenes[activeLocalScene].SetActive(false);
+
+        localScenes[sceneNumber].SetActive(true);
+
+        activeLocalScene= sceneNumber;
+
         while(blockingImage.color.a<0)
         {
             c.a-=Time.deltaTime;
             blockingImage.color =c;            
         }
+                
+        blockingImage.enabled = false;
+
         yield return null;
     }
 }
