@@ -14,7 +14,9 @@ public class ItemData : MonoBehaviour
 
     public Sprite itemSlotSprite;
     public string objectName;
-    public Vector2 namTagSize= new Vector2(3,0.65f);
+    public Vector2 nameTagSize= new Vector2(3,0.65f);
+    public string itemName;
+    public Vector2 ItemNameTagSize= new Vector2(3,0.65f);
 
     [Header("Failure")]
 

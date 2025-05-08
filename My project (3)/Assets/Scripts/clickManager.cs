@@ -75,8 +75,8 @@ public class clickManager : MonoBehaviour
 
         foreach (GameObject g in item.objectsToRemove)
         {
-            Destroy(g);
-        }        
+            g.SetActive(false); // No lo destruyes, solo lo ocultas
+        }
 
         gameManager.UpdateEquipmentCanvas();
         yield return null;

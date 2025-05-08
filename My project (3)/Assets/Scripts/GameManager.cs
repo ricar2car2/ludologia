@@ -61,7 +61,8 @@ public class GameManager : MonoBehaviour
 
     public void ShowItemName (int equipmentCanvasID)
     {
-        
+        if(equipmentCanvasID<collectedItems.Count)
+            UpdateNameTag(collectedItems[equipmentCanvasID]);
     }
 
     public void UpdateEquipmentCanvas()
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         {
 
             //elige entre EmptySlotSprite y el sprite del item
-            if (i<itemsAmount)
+            if (i<itemsAmount && collectedItems [i].itemSlotSprite != null)
                 equipmentImages[i].sprite = collectedItems [i].itemSlotSprite;
             else              
                 equipmentImages[i].sprite = EmptyItemSlotSprite;
@@ -89,8 +90,10 @@ public class GameManager : MonoBehaviour
 
    public void UpdateNameTag(ItemData item)
     {
-        if (currentItemShown == item && nameTag.gameObject.activeSelf)
-            return; // Evita recalcular si ya está activo con el mismo item
+        Debug.Log($"UpdateNameTag llamado con: {(item != null ? item.name : "null")}");
+
+        if (currentItemShown == item && nameTag.parent.gameObject.activeSelf)
+            return;
 
         if(item==null)
         {
@@ -98,13 +101,24 @@ public class GameManager : MonoBehaviour
             return;
         }
 
+        nameTag.parent.gameObject.SetActive(true);
+
+        string nameText= item.objectName;
+        Vector2 size = item.nameTagSize;
+
+        if (collectedItems.Contains(item))
+        {
+            nameText = item.itemName;
+            size = item.ItemNameTagSize; 
+        }
+
         currentItemShown = item;
         nameTag.gameObject.SetActive(true);
 
-        nameTag.GetComponentInChildren<TextMeshProUGUI>().text = item.objectName;
+        nameTag.GetComponentInChildren<TextMeshProUGUI>().text = nameText;
 
-        nameTag.sizeDelta = item.namTagSize; // Esto solo si el tamaño es fijo por item
-        nameTag.localPosition = new Vector2(item.namTagSize.x / 2, -0.6f); // Este offset puede causar salto si es relativo al tamaño
+        nameTag.sizeDelta = size; // Esto solo si el tamaño es fijo por item
+        nameTag.localPosition = new Vector2(size.x / 2, -0.6f); // Este offset puede causar salto si es relativo al tamaño
     }
 
 
@@ -164,6 +178,8 @@ public class GameManager : MonoBehaviour
 
         UpdateHintBox(null);
         UpdateNameTag(null);
+
+        equipmentCanvas.SetActive(true);
 
         while(blockingImage.color.a<0)
         {
