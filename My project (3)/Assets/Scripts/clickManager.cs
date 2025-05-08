@@ -30,20 +30,28 @@ public class clickManager : MonoBehaviour
         }
     }
 
-    public void ClickReaction(ItemData item)
-{
-    bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item);
-
-    if (canGetItem)
+  public void ClickReaction(ItemData item)
     {
-        // IMPORTANTE: marcar este como el último item mostrado (por si no se hizo hover antes)
-        gameManager.currentItemShown = item;
+        bool canGetItem = item.requiredItemID == -1 || gameManager.SelectedItemID == item.requiredItemID;
 
-        StartCoroutine(HandleItemClick(item));
+        if (canGetItem)
+        {
+            // Si se puede recoger, no mostramos hint ni nameTag. Solo recogemos.
+            gameManager.currentItemShown = item;
+            StartCoroutine(HandleItemClick(item));
+        }
+        else
+        {
+            // Si NO se puede recoger, mostramos la hint explicativa
+            gameManager.UpdateHintBox(item);
+            gameManager.UpdateNameTag(item);
+            gameManager.currentItemShown = item;
+        }
+
+        gameManager.CheckSpecialConditions(item, canGetItem);
     }
-    gameManager.CheckSpecialConditions(item, canGetItem);
 
-}
+
 
 
     private IEnumerator HandleItemClick(ItemData item)
@@ -70,7 +78,7 @@ public class clickManager : MonoBehaviour
             Destroy(g);
         }        
 
-        Debug.Log("Coleccionado");
+        gameManager.UpdateEquipmentCanvas();
         yield return null;
     }
 }

@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     public Image[] equipmentSlots, equipmentImages;
     public Sprite EmptyItemSlotSprite;
     public Color selectedItemColor;
-    int SelectedCanvasSlotID =0, SelectedItemID;
+    public int SelectedCanvasSlotID =0, SelectedItemID;
 
 
 
@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
         c.a=0;
         equipmentSlots[SelectedCanvasSlotID].GetComponent<Image>().color=c;
 
-        if(equipmentCanvasID>= collectedItems.Count)
+        if(equipmentCanvasID>= collectedItems.Count || equipmentCanvasID <0)
         {
             SelectedItemID = -1;
             SelectedCanvasSlotID = 0;
@@ -62,6 +62,28 @@ public class GameManager : MonoBehaviour
     public void ShowItemName (int equipmentCanvasID)
     {
         
+    }
+
+    public void UpdateEquipmentCanvas()
+    {
+        //cuantos items tenemos
+        int itemsAmount = collectedItems.Count, itemSlotsAmount=equipmentSlots.Length;
+
+        for(int i=0; i<itemSlotsAmount;i++)
+        {
+
+            //elige entre EmptySlotSprite y el sprite del item
+            if (i<itemsAmount)
+                equipmentImages[i].sprite = collectedItems [i].itemSlotSprite;
+            else              
+                equipmentImages[i].sprite = EmptyItemSlotSprite;
+        }
+
+        if (itemsAmount == 0)
+            SelectItem(-1);
+        else if (itemsAmount == 1)
+            SelectItem(0);
+    
     }
 
 
