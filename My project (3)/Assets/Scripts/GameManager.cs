@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
 
-    public static List<int> collectedItems = new List<int>();
+    public static List<ItemData> collectedItems = new List<ItemData>();
     [Header("Setup")]
     public RectTransform nameTag, hintBox;
     public ItemData currentItemShown;
@@ -18,6 +18,15 @@ public class GameManager : MonoBehaviour
     public Image blockingImage;
     public GameObject[] localScenes;
     int activeLocalScene=0;
+
+    [Header("Equipment")]
+    public GameObject equipmentCanvas;
+    public Image[] equipmentSlots, equipmentImages;
+    public Sprite EmptyItemSlotSprite;
+    public Color selectedItemColor;
+    int SelectedCanvasSlotID =0, SelectedItemID;
+
+
 
     private void Awake()
     {
@@ -31,10 +40,41 @@ public class GameManager : MonoBehaviour
         Instance = this;
     }
 
+    public void SelectItem (int equipmentCanvasID)
+    {
+        Color c= Color.white;
+        c.a=0;
+        equipmentSlots[SelectedCanvasSlotID].GetComponent<Image>().color=c;
+
+        if(equipmentCanvasID>= collectedItems.Count)
+        {
+            SelectedItemID = -1;
+            SelectedCanvasSlotID = 0;
+            return;
+        }
+
+        equipmentSlots[equipmentCanvasID].GetComponent<Image>().color= selectedItemColor;
+
+        SelectedCanvasSlotID = equipmentCanvasID;
+        SelectedItemID= collectedItems[SelectedCanvasSlotID].itemID;
+    }
+
+    public void ShowItemName (int equipmentCanvasID)
+    {
+        
+    }
+
+
    public void UpdateNameTag(ItemData item)
     {
         if (currentItemShown == item && nameTag.gameObject.activeSelf)
             return; // Evita recalcular si ya está activo con el mismo item
+
+        if(item==null)
+        {
+            nameTag.parent.gameObject.SetActive(false);
+            return;
+        }
 
         currentItemShown = item;
         nameTag.gameObject.SetActive(true);
@@ -59,7 +99,7 @@ public class GameManager : MonoBehaviour
         hintBox.parent.localPosition = new Vector2(0, 0);
     }
 
-    public void CheckSpecialConditions(ItemData item)
+    public void CheckSpecialConditions(ItemData item, bool canGetItem)
     {
         switch(item.itemID){
             case -12:
@@ -72,9 +112,11 @@ public class GameManager : MonoBehaviour
             StartCoroutine(ChangeScene(0,0));
                 break;  
             case -1:
+            if(canGetItem)
+            {
+            StartCoroutine(ChangeScene(2,1));
+            }
             //victoria magistral. Final del juego ganaste
-            StartCoroutine(ChangeScene(3,1));
-
                 break;
         }
     }
@@ -97,6 +139,9 @@ public class GameManager : MonoBehaviour
         localScenes[sceneNumber].SetActive(true);
 
         activeLocalScene= sceneNumber;
+
+        UpdateHintBox(null);
+        UpdateNameTag(null);
 
         while(blockingImage.color.a<0)
         {

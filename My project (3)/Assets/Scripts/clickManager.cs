@@ -32,7 +32,7 @@ public class clickManager : MonoBehaviour
 
     public void ClickReaction(ItemData item)
 {
-    bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item.requiredItemID);
+    bool canGetItem = item.requiredItemID == -1 || GameManager.collectedItems.Contains(item);
 
     if (canGetItem)
     {
@@ -41,18 +41,14 @@ public class clickManager : MonoBehaviour
 
         StartCoroutine(HandleItemClick(item));
     }
-    else
-    {
-        gameManager.UpdateHintBox(item);
-        gameManager.CheckSpecialConditions(item);
+    gameManager.CheckSpecialConditions(item, canGetItem);
 
-    }
 }
 
 
     private IEnumerator HandleItemClick(ItemData item)
     {
-        GameManager.collectedItems.Add(item.itemID);
+        GameManager.collectedItems.Add(item);
 
         // Espera un pequeño tiempo antes de actualizar la escena
         yield return new WaitForSeconds(0.03f);

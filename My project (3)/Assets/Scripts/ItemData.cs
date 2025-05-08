@@ -10,6 +10,9 @@ public class ItemData : MonoBehaviour
     [Header("Exito")]
 
     public GameObject[] objectsToRemove;
+    public GameObject[] objectsToSetActive;
+
+    public Sprite itemSlotSprite;
     public string objectName;
     public Vector2 namTagSize= new Vector2(3,0.65f);
 
