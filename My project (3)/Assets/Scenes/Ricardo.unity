@@ -392,6 +392,8 @@ MonoBehaviour:
   - {fileID: 1456688839}
   EmptyItemSlotSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
   selectedItemColor: {r: 0.7264151, g: 0.65254575, b: 0.044544343, a: 0.627451}
+  SelectedCanvasSlotID: 0
+  SelectedItemID: 0
 --- !u!1 &112674119
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,13 +547,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407ec434d65613748a52c273fa2839f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 0
+  itemID: 1
   requiredItemID: -1
   objectsToRemove:
   - {fileID: 129429378}
   - {fileID: 318095034}
   objectsToSetActive: []
-  itemSlotSprite: {fileID: 0}
+  itemSlotSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   objectName: El Triangulo
   namTagSize: {x: 3, y: 0.65}
   hintMessage: I need love
@@ -3016,7 +3018,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: hol
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3280,7 +3282,7 @@ MonoBehaviour:
   - {fileID: 966178042}
   - {fileID: 1224147331}
   objectsToSetActive: []
-  itemSlotSprite: {fileID: 0}
+  itemSlotSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   objectName: La Capsula
   namTagSize: {x: 3, y: 0.65}
   hintMessage: I need water
@@ -5903,13 +5905,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 407ec434d65613748a52c273fa2839f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemID: 0
-  requiredItemID: -1
+  itemID: 2
+  requiredItemID: 1
   objectsToRemove:
   - {fileID: 2052303947}
   - {fileID: 255562809}
   objectsToSetActive: []
-  itemSlotSprite: {fileID: 0}
+  itemSlotSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   objectName: El Cuadrado Grande
   namTagSize: {x: 3, y: 0.8}
   hintMessage: I need love
