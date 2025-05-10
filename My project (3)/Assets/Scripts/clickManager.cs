@@ -10,74 +10,77 @@ public class clickManager : MonoBehaviour
 
     private void Start()
     {
+        // Busca una instancia del GameManager en la escena
         gameManager = FindFirstObjectByType<GameManager>();
     }
 
     private void Update()
     {
+        // Detecta clic izquierdo del mouse
         if (Input.GetMouseButtonDown(0))
         {
-            // Si no hay objeto debajo del mouse, resetea el estado
+            // Si no hay ningún objeto debajo del mouse, resetea el estado
             Vector2 mouseWorldPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             RaycastHit2D hit = Physics2D.Raycast(mouseWorldPos, Vector2.zero);
 
             if (hit.collider == null)
             {
-                gameManager.currentItemShown = null;
-                gameManager.hintBox.gameObject.SetActive(false);
-
+                gameManager.currentItemShown = null; // Quita referencia al item mostrado
+                gameManager.hintBox.gameObject.SetActive(false); // Oculta el hint
             }
         }
     }
 
-  public void ClickReaction(ItemData item)
+    public void ClickReaction(ItemData item)
     {
+        // Verifica si el item puede recogerse (si no requiere otro objeto, o si se tiene el requerido)
         bool canGetItem = item.requiredItemID == -1 || gameManager.SelectedItemID == item.requiredItemID;
 
         if (canGetItem)
         {
-            // Si se puede recoger, no mostramos hint ni nameTag. Solo recogemos.
+            // Si se puede recoger, no muestra hint ni nombre, solo lo recoge
             gameManager.currentItemShown = item;
             StartCoroutine(HandleItemClick(item));
         }
         else
         {
-            // Si NO se puede recoger, mostramos la hint explicativa
+            // Si no se puede recoger, muestra hint explicativo y nombre
             gameManager.UpdateHintBox(item);
             gameManager.UpdateNameTag(item);
             gameManager.currentItemShown = item;
         }
 
+        // Verifica condiciones especiales (como cambio de escena)
         gameManager.CheckSpecialConditions(item, canGetItem);
     }
 
-
-
-
     private IEnumerator HandleItemClick(ItemData item)
     {
+        // Añade el ítem a la lista de recogidos
         GameManager.collectedItems.Add(item);
 
-        // Espera un pequeño tiempo antes de actualizar la escena
+        // Espera un pequeño delay antes de actualizar la escena
         yield return new WaitForSeconds(0.03f);
 
+        // Llama la rutina para actualizar la escena
         yield return StartCoroutine(UpdateSceneAfterAction(item));
     }
 
     private IEnumerator UpdateSceneAfterAction(ItemData item)
     {
-        // Oculta la nametag si corresponde
+        // Oculta el nombre si aún está mostrándose ese objeto
         if (gameManager.currentItemShown == item)
         {
             gameManager.nameTag.gameObject.SetActive(false);
         }
-       
 
+        // Oculta los objetos relacionados al item recogido
         foreach (GameObject g in item.objectsToRemove)
         {
-            g.SetActive(false); // No lo destruyes, solo lo ocultas
+            g.SetActive(false);
         }
 
+        // Actualiza el canvas de equipo
         gameManager.UpdateEquipmentCanvas();
         yield return null;
     }
