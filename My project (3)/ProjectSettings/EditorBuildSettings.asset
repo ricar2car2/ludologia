@@ -6,8 +6,26 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Victor/Inicio.unity
+    guid: 0c2be5f7fb44cb24f977fe52fc129797
+  - enabled: 1
+    path: Assets/Scenes/Victor/Cinematica.unity
+    guid: 336172f28ce1b5f44b07e8669007d405
+  - enabled: 1
+    path: Assets/Scenes/Victor/SeleccionMundo.unity
+    guid: 4352da8bca00aac46b91dc2d577933bd
+  - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
+  - enabled: 1
+    path: Assets/Scenes/Victor/Mundos/Fantasia.unity
+    guid: 35d5cdb9742f92e45b070c54fbaf21a2
+  - enabled: 1
+    path: Assets/Scenes/Victor/Mundos/Futurista.unity
+    guid: 5b2439861597c064fb6a9c9b8a7b006a
+  - enabled: 1
+    path: Assets/Scenes/Victor/Mundos/Skate.unity
+    guid: 0556ffddf0975e245a7ceeb6bb46efe2
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
