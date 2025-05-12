@@ -4,6 +4,7 @@ using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEditor.Rendering;
 
 public class GameManager : MonoBehaviour
 {
@@ -25,6 +26,15 @@ public class GameManager : MonoBehaviour
     public Sprite EmptyItemSlotSprite;
     public Color selectedItemColor;
     public int SelectedCanvasSlotID = 0, SelectedItemID;
+
+    [Header("Dialogue UI")]
+    public List<string> currentLines; // en lugar de DialogueData
+    public DialogueData currentDialogue;
+    public GameObject dialogueBox;
+    public TextMeshProUGUI dialogueText;
+    int currentLineIndex = 0;
+    public bool isDialogueActive = false;
+
 
     private void Awake()
     {
@@ -194,4 +204,65 @@ public class GameManager : MonoBehaviour
         blockingImage.enabled = false;
         yield return null;
     }
+
+    public void StartDialogue(List<string> lines)
+    {
+        if (isDialogueActive) return; // evitar iniciar dos veces
+
+        if (lines == null || lines.Count == 0)
+        {
+            Debug.LogWarning("Diálogo vacío o nulo.");
+            return;
+        }
+
+        currentLines = lines;
+        currentLineIndex = 0;
+        isDialogueActive = true;
+        dialogueBox.SetActive(true);
+        ShowCurrentLine();
+    }
+
+
+    void ShowCurrentLine()
+    {
+        if (currentLines != null && currentLineIndex < currentLines.Count)
+        {
+            dialogueText.text = currentLines[currentLineIndex];
+        }
+    }
+
+    void AdvanceDialogue()
+    {
+        currentLineIndex++;
+
+        if (currentLines != null && currentLineIndex < currentLines.Count)
+        {
+            ShowCurrentLine();
+        }
+        else
+        {
+            EndDialogue();
+        }
+    }
+
+    void EndDialogue()
+    {
+        isDialogueActive = false;
+        dialogueBox.SetActive(false);
+        currentLines = null;
+    }
+
+
+    private void Update()
+    {
+
+        if (isDialogueActive && Input.GetMouseButtonDown(0)) // clic izquierdo
+        {
+            AdvanceDialogue();
+        }
+    }
+
+
+
+
 }

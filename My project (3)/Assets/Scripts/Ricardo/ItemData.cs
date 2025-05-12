@@ -16,6 +16,10 @@ public class ItemData : MonoBehaviour
     // Sprite que representa este ítem en el equipo
     public Sprite itemSlotSprite;
 
+    [Header("Tipo de objeto")]
+    public bool isNPC = false;
+
+
     // Nombre que aparece cuando el ítem aún no ha sido recogido
     public string objectName;
 
@@ -34,6 +38,12 @@ public class ItemData : MonoBehaviour
     [TextArea(3, 3)]
     public string hintMessage;
 
+    [Header("Diálogo")]
+    [TextArea(2, 4)]
+    public List<string> dialogue;
+
     // Tamaño del cuadro de texto del hint
     public Vector2 hintBoxSize = new Vector2(4, 0.65f);
+
+
 }

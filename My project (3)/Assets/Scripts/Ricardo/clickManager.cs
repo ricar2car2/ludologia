@@ -16,6 +16,8 @@ public class clickManager : MonoBehaviour
 
     private void Update()
     {
+        if (gameManager.isDialogueActive)
+            return;
         // Detecta clic izquierdo del mouse
         if (Input.GetMouseButtonDown(0))
         {
@@ -36,22 +38,30 @@ public class clickManager : MonoBehaviour
         // Verifica si el item puede recogerse (si no requiere otro objeto, o si se tiene el requerido)
         bool canGetItem = item.requiredItemID == -1 || gameManager.SelectedItemID == item.requiredItemID;
 
-        if (canGetItem)
+
+        if (item.isNPC && item.dialogue != null)
         {
-            // Si se puede recoger, no muestra hint ni nombre, solo lo recoge
-            gameManager.currentItemShown = item;
-            StartCoroutine(HandleItemClick(item));
-        }
-        else
-        {
-            // Si no se puede recoger, muestra hint explicativo y nombre
-            gameManager.UpdateHintBox(item);
-            gameManager.UpdateNameTag(item);
-            gameManager.currentItemShown = item;
+            gameManager.StartDialogue(item.dialogue);
+            return;
         }
 
-        // Verifica condiciones especiales (como cambio de escena)
-        gameManager.CheckSpecialConditions(item, canGetItem);
+
+        if (canGetItem)
+            {
+                // Si se puede recoger, no muestra hint ni nombre, solo lo recoge
+                gameManager.currentItemShown = item;
+                StartCoroutine(HandleItemClick(item));
+            }
+            else
+            {
+                // Si no se puede recoger, muestra hint explicativo y nombre
+                gameManager.UpdateHintBox(item);
+                gameManager.UpdateNameTag(item);
+                gameManager.currentItemShown = item;
+            }
+
+            // Verifica condiciones especiales (como cambio de escena)
+            gameManager.CheckSpecialConditions(item, canGetItem);        
     }
 
     private IEnumerator HandleItemClick(ItemData item)
