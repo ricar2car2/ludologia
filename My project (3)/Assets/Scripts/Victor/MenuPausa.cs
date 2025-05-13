@@ -4,6 +4,7 @@ public class MenuPausa : MonoBehaviour
 {
     public GameObject pausePanel;
     public GameObject pauseButton;
+    public GameObject settingsPanel;
 
     void Start()
     {
@@ -18,17 +19,6 @@ public class MenuPausa : MonoBehaviour
         pausePanel.SetActive(true);
 
     }
-
-    public void SeleccionMundo()
-    {
-        SceneManager.LoadScene("SeleccionMundo");
-    }
-
-    public void MenuInicio()
-    {
-        SceneManager.LoadScene("Inicio");
-    }
-
     public void Continue()
     {
         Time.timeScale = 1f;
@@ -36,5 +26,22 @@ public class MenuPausa : MonoBehaviour
         pauseButton.SetActive(true);
 
     }
+    public void SeleccionMundo()
+    {
+        SceneManager.LoadScene("SeleccionMundo");
+    }
+    public void Settings()
+    {
+       
+        pausePanel.SetActive(false);
+        settingsPanel.SetActive(true);
+
+    }
+    public void MenuInicio()
+    {
+        SceneManager.LoadScene("Inicio");
+    }
+
+    
 
 }
