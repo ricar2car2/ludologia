@@ -7,10 +7,9 @@ using System.Linq;
 public class ButtonOrderGame : MonoBehaviour
 {
     public Button[] bottomButtons; // Los 4 botones en la parte inferior
-    public Transform centerPanel; // Panel en el centro donde se mostrarán los botones seleccionados
     public TMP_Text resultText;
 
-    private List<int> correctOrder = new List<int> { 2, 0, 3, 1 }; // Índice de orden correcto
+    private List<int> correctOrder = new List<int> { 0, 1, 2, 3 }; // Índice de orden correcto
     private List<int> selectedOrder = new List<int>();
 
     void Start()
@@ -31,8 +30,7 @@ public class ButtonOrderGame : MonoBehaviour
 
         selectedOrder.Add(index);
 
-        // Mover el botón al panel central
-        bottomButtons[index].transform.SetParent(centerPanel);
+        // Desactiva el botón para evitar múltiples clics
         bottomButtons[index].interactable = false;
 
         if (selectedOrder.Count == 4)
@@ -48,7 +46,7 @@ public class ButtonOrderGame : MonoBehaviour
         else
         {
             resultText.text = "Orden incorrecto. Intenta de nuevo.";
-            Invoke("ResetGame", 2f);
+            Invoke("ResetGame", 2f); // Espera 2 segundos antes de reiniciar
         }
     }
 
@@ -57,10 +55,10 @@ public class ButtonOrderGame : MonoBehaviour
         selectedOrder.Clear();
         resultText.text = "";
 
-        // Borrar los botones en el panel central
-        foreach (Transform child in centerPanel)
+        // Reactivar todos los botones
+        foreach (Button btn in bottomButtons)
         {
-            Destroy(child.gameObject);
+            btn.interactable = true;
         }
     }
 }

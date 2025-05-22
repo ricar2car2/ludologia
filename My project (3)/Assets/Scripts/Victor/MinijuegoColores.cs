@@ -9,7 +9,7 @@ public class ColorSelector : MonoBehaviour
     public Button[] colorButtons; // Asigna los 8 botones desde el inspector
     public TMP_Text resultText; // Asigna el TMP_Text desde el inspector
 
-    private List<int> correctIndexes = new List<int> { 1, 3, 5, 7 }; // Ajusta estos índices a los correctos
+    private List<int> correctIndexes = new List<int> { 1, 2, 5, 6 }; // Ajusta estos índices a los correctos
     private List<int> selectedIndexes = new List<int>();
 
     void Start()
