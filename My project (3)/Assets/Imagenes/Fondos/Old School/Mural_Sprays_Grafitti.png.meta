@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 8be14a4bb4645aa4a9366c901e1bd230
+guid: 4d6a6222beca40d41b54bb10f1a08da3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1615822431678140805
-    second: Tienda_Fuera_0
+      213: 4951915166995670629
+    second: Mural_Sprays_Grafitti_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -96,24 +96,11 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Tienda_Fuera_0
+      name: Mural_Sprays_Grafitti_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 581984cc0fd8c6610800000000000000
-      internalID: 1615822431678140805
+      spriteID: 56665a6ab9cb8b440800000000000000
+      internalID: 4951915166995670629
       vertices: []
       indices: 
       edges: []
@@ -147,8 +134,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      Tienda_Fuera_0: 1615822431678140805
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
