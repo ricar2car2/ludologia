@@ -138,6 +138,19 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -484,7 +497,22 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      DahliaConVarita_0: -7371425282955454597
+      DahliaConVarita_1: -98352847301349575
+      DahliaConVarita_10: -7647044857970048745
+      DahliaConVarita_11: -1290118179982272859
+      DahliaConVarita_12: 1348612230458725765
+      DahliaConVarita_13: 2675650231329403923
+      DahliaConVarita_14: -8498404406104941003
+      DahliaConVarita_2: -2362339597372258468
+      DahliaConVarita_3: -574456240642737283
+      DahliaConVarita_4: 7641383427242641575
+      DahliaConVarita_5: -7146141750190766242
+      DahliaConVarita_6: -4073556631825977955
+      DahliaConVarita_7: -8644355681370997164
+      DahliaConVarita_8: -2158892755300390074
+      DahliaConVarita_9: 6627474858506571351
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
