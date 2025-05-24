@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class MenuPausa : MonoBehaviour
 {
-    public GameObject pausePanel, inicioPanel, mundosPanel, ajustesPanel, mFantasiaPanel, mFuturistaPanel, mSkatePanel;
+    public GameObject pausePanel, inicioPanel, mundosPanel, ajustesPanel, mFantasiaPanel, mFuturistaPanel, mSkatePanel, inventarioPanel;
     public GameObject panelBotones;
     public static int vueltaPausa; //Valor que indica a donde volver despues de salir de la pausa: 1 = MenuMundos, 2 = MFantasía, 3 = MFuturista, 4 = MSkate
 
@@ -28,6 +28,17 @@ public class MenuPausa : MonoBehaviour
         {
             mSkatePanel.SetActive(false); 
         }
+    }
+    public void ShowInventory()
+    {
+
+        inventarioPanel.SetActive(true);
+
+    }
+    public void HideInventory()
+    {
+
+        inventarioPanel.SetActive(false);
     }
     public void Continue()
     {
@@ -60,7 +71,31 @@ public class MenuPausa : MonoBehaviour
         vueltaPausa = 1;
         pausePanel.SetActive(false);
         mundosPanel.SetActive(true);
+
     }
+    public void SeleccionMundoButton()
+    {
+        
+        panelBotones.SetActive(false);
+        mundosPanel.SetActive(true);
+
+        if (vueltaPausa == 2)
+        {
+            mFantasiaPanel.SetActive(false);
+        }
+        else if (vueltaPausa == 3)
+        {
+            mFuturistaPanel.SetActive(false);
+        }
+        else if (vueltaPausa == 4)
+        {
+            mSkatePanel.SetActive(false);
+        }
+
+        vueltaPausa = 1;
+    }
+
+
     public void Settings()
     {
         BackButton.vueltaAjustes = 2;
