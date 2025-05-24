@@ -3,15 +3,20 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System.ComponentModel.Design;
+using UnityEditor.SearchService;
+using UnityEngine.SceneManagement;
 
 public class clickManager : MonoBehaviour
 {
     GameManager gameManager;
+    SceneManager scene;
 
     private void Start()
     {
         // Busca una instancia del GameManager en la escena
         gameManager = FindFirstObjectByType<GameManager>();
+        
+
     }
 
     private void Update()
@@ -33,36 +38,39 @@ public class clickManager : MonoBehaviour
         }
     }
 
+    
+
     public void ClickReaction(ItemData item)
+{
+    // Verifica si el item puede recogerse (si no requiere otro objeto, o si se tiene el requerido)
+    bool canGetItem = item.requiredItemID == -1 || gameManager.SelectedItemID == item.requiredItemID;
+
+    if (item.isNPC && item.dialogue != null)
     {
-        // Verifica si el item puede recogerse (si no requiere otro objeto, o si se tiene el requerido)
-        bool canGetItem = item.requiredItemID == -1 || gameManager.SelectedItemID == item.requiredItemID;
-
-
-        if (item.isNPC && item.dialogue != null)
-        {
-            gameManager.StartDialogue(item.dialogue);
-            return;
-        }
-
-
-        if (canGetItem)
-            {
-                // Si se puede recoger, no muestra hint ni nombre, solo lo recoge
-                gameManager.currentItemShown = item;
-                StartCoroutine(HandleItemClick(item));
-            }
-            else
-            {
-                // Si no se puede recoger, muestra hint explicativo y nombre
-                gameManager.UpdateHintBox(item);
-                gameManager.UpdateNameTag(item);
-                gameManager.currentItemShown = item;
-            }
-
-            // Verifica condiciones especiales (como cambio de escena)
-            gameManager.CheckSpecialConditions(item, canGetItem);        
+        gameManager.StartDialogue(item.dialogue);
+        return;
     }
+
+    if (canGetItem)
+    {
+        // Oculta el nameTag antes de recoger el objeto
+        gameManager.nameTag.gameObject.SetActive(false);
+        gameManager.currentItemShown = null;
+
+        StartCoroutine(HandleItemClick(item));
+    }
+    else
+    {
+        // Si no se puede recoger, muestra hint explicativo y nombre
+        gameManager.UpdateHintBox(item);
+        gameManager.UpdateNameTag(item);
+        gameManager.currentItemShown = item;
+    }
+
+    // Verifica condiciones especiales (como cambio de escena)
+    gameManager.CheckSpecialConditions(item, canGetItem);
+}
+
 
     private IEnumerator HandleItemClick(ItemData item)
     {
@@ -93,5 +101,7 @@ public class clickManager : MonoBehaviour
         // Actualiza el canvas de equipo
         gameManager.UpdateEquipmentCanvas();
         yield return null;
-    }
+    }
+    
+    
 }

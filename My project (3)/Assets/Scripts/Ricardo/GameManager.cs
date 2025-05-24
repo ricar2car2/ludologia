@@ -35,6 +35,8 @@ public class GameManager : MonoBehaviour
     int currentLineIndex = 0;
     public bool isDialogueActive = false;
 
+    
+
 
     private void Awake()
     {
@@ -259,10 +261,7 @@ public class GameManager : MonoBehaviour
         if (isDialogueActive && Input.GetMouseButtonDown(0)) // clic izquierdo
         {
             AdvanceDialogue();
-        }
-    }
-
-
-
+        }
+    }
 
 }

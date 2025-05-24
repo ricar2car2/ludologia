@@ -43,7 +43,7 @@ public class ItemData : MonoBehaviour
     public List<string> dialogue;
 
     // Tamano del cuadro de texto del hint
-    public Vector2 hintBoxSize = new Vector2(4, 0.65f);
+    public Vector2 hintBoxSize = new Vector2(4, 0.65f);
 
 
 }
