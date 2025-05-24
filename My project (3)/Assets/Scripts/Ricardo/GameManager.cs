@@ -151,14 +151,24 @@ public class GameManager : MonoBehaviour
     {
         switch (item.itemID)
         {
-            case -12:
-                // Cambia de escena 1 a escena 2
-                StartCoroutine(ChangeScene(1, 0));
-                break;
-            case -21:
+            case -11:
                 // Cambia de escena 2 a escena 1
                 StartCoroutine(ChangeScene(0, 0));
                 break;
+            case -22:
+                // Cambia de escena 1 a escena 2
+                StartCoroutine(ChangeScene(1, 0));
+                break;
+            
+            case -33:
+                // Cambia de escena 2 a escena 1
+                StartCoroutine(ChangeScene(2, 0));
+                break;
+            case -44:
+                // Cambia de escena 2 a escena 1
+                StartCoroutine(ChangeScene(3, 0));
+                break;
+                
             case -1:
                 // Gana el juego si se puede recoger
                 if (canGetItem)
