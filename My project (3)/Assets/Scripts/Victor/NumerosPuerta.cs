@@ -9,10 +9,15 @@ public class SequenceGame : MonoBehaviour
     public Button[] buttons; // Los 9 botones
     public TMP_Text resultText;
 
-    // Los índices correctos en orden (ajústalo como quieras)
+    // Los ï¿½ndices correctos en orden (ajï¿½stalo como quieras)
     private List<int> correctSequence = new List<int> { 3, 5, 4, 1 };
 
     private List<int> playerSequence = new List<int>();
+
+    GameManager gameManager;
+
+
+
 
     void Start()
     {
@@ -20,6 +25,8 @@ public class SequenceGame : MonoBehaviour
         {
             int index = i;
             buttons[i].onClick.AddListener(() => OnButtonPressed(index));
+            gameManager = FindFirstObjectByType<GameManager>();   
+
         }
 
         resultText.text = "";
@@ -30,7 +37,7 @@ public class SequenceGame : MonoBehaviour
         if (playerSequence.Count >= 4)
             return;
 
-        Debug.Log("Botón pulsado: " + index); // Verifica qué índice se está registrando
+        Debug.Log("Botï¿½n pulsado: " + index); // Verifica quï¿½ ï¿½ndice se estï¿½ registrando
 
         playerSequence.Add(index);
         buttons[index].interactable = false;
@@ -45,7 +52,12 @@ public class SequenceGame : MonoBehaviour
     {
         if (correctSequence.SequenceEqual(playerSequence))
         {
-            resultText.text = "¡Ganaste! Secuencia correcta.";
+            resultText.text = "ï¿½Ganaste! Secuencia correcta.";
+            if (gameManager != null)
+            {
+                gameManager.puzzleNumerosResuelto = true;
+            }
+
         }
         else
         {

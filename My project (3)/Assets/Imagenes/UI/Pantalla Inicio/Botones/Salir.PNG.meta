@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: c83d707b1ac637948bd9b6a1b33c40c7
+guid: 721d37f19b62d0d4ab087790361a40cb
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5184842327223164937
-    second: BotonSelectorMundo_0
+      213: -5086458757861956760
+    second: Salir_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: BotonSelectorMundo_0
+      name: Salir_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 154
-        height: 147
+        x: 5
+        y: 4
+        width: 378
+        height: 122
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 900eb8a40a244f740800000000000000
-      internalID: 5184842327223164937
+      spriteID: 863a6fc75b44969b0800000000000000
+      internalID: -5086458757861956760
       vertices: []
       indices: 
       edges: []
@@ -147,8 +147,7 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable:
-      BotonSelectorMundo_0: 5184842327223164937
+    nameFileIdTable: {}
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

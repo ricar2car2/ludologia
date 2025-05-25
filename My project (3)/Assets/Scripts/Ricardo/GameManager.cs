@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     public GameObject[] localScenes;
     int activeLocalScene = 0;
 
+    private bool isChangingScene = false;
+
+
+
     [Header("Equipment")]
     public GameObject equipmentCanvas;
     public Image[] equipmentSlots, equipmentImages;
@@ -35,7 +39,15 @@ public class GameManager : MonoBehaviour
     int currentLineIndex = 0;
     public bool isDialogueActive = false;
 
-    
+
+    [Header("Cambio de objetos permanentes")]
+    public bool puzzleBotonesResuelto = false;
+
+    public bool puzzleNumerosResuelto = false;
+
+
+
+
 
 
     private void Awake()
@@ -80,23 +92,17 @@ public class GameManager : MonoBehaviour
 
     public void UpdateEquipmentCanvas()
     {
-        int itemsAmount = collectedItems.Count, itemSlotsAmount = equipmentSlots.Length;
+        int itemsAmount = collectedItems.Count;
 
-        // Actualiza los sprites de los slots de equipo
-        for (int i = 0; i < itemSlotsAmount; i++)
+        for (int i = 0; i < equipmentImages.Length; i++)
         {
             if (i < itemsAmount && collectedItems[i].itemSlotSprite != null)
                 equipmentImages[i].sprite = collectedItems[i].itemSlotSprite;
             else
                 equipmentImages[i].sprite = EmptyItemSlotSprite;
         }
-
-        // Ajusta selección inicial si hay solo un objeto
-        if (itemsAmount == 0)
-            SelectItem(-1);
-        else if (itemsAmount == 1)
-            SelectItem(0);
     }
+
 
     public void UpdateNameTag(ItemData item)
     {
@@ -152,23 +158,65 @@ public class GameManager : MonoBehaviour
         switch (item.itemID)
         {
             case -11:
-                // Cambia de escena 2 a escena 1
+                // Cambia a escena 1
                 StartCoroutine(ChangeScene(0, 0));
                 break;
             case -22:
-                // Cambia de escena 1 a escena 2
+                // Cambia a escena 2
                 StartCoroutine(ChangeScene(1, 0));
                 break;
-            
+
             case -33:
-                // Cambia de escena 2 a escena 1
+                // Cambia a escena 3
                 StartCoroutine(ChangeScene(2, 0));
                 break;
             case -44:
-                // Cambia de escena 2 a escena 1
+                // Cambia a escena 4
                 StartCoroutine(ChangeScene(3, 0));
                 break;
-                
+
+            case -55:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(4, 0));
+                break;
+
+            case -66:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(5, 0));
+                break;
+            case -77:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(6, 0));
+                break;
+            case -88:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(7, 0));
+                break;
+            case -99:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(8, 0));
+                break;
+            case -1000:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(9, 0));
+                break;
+            case -1100:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(10, 0));
+                break;
+            case -1200:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(11, 0));
+                break;
+            case -1300:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(12, 0));
+                break;
+            case -1400:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(13, 0));
+                break;
+
             case -1:
                 // Gana el juego si se puede recoger
                 if (canGetItem)
@@ -179,43 +227,29 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public IEnumerator ChangeScene(int sceneNumber, float delay)
-    {
-        yield return new WaitForSeconds(delay);
+public IEnumerator ChangeScene(int sceneNumber, float delay)
+{
+    if (isChangingScene) yield break;
+    isChangingScene = true;
 
-        // Fade in: oscurece la pantalla
-        Color c = blockingImage.color;
-        blockingImage.enabled = true;
-        while (blockingImage.color.a < 1)
-        {
-            c.a += Time.deltaTime;
-            blockingImage.color = c;
-        }
+    yield return new WaitForSeconds(delay);
 
-        Debug.Log("test");
+    // Desactiva TODAS las escenas por seguridad
+    for (int i = 0; i < localScenes.Length; i++)
+        localScenes[i].SetActive(false);
 
-        // Desactiva escena actual y activa la nueva
-        localScenes[activeLocalScene].SetActive(false);
-        localScenes[sceneNumber].SetActive(true);
-        activeLocalScene = sceneNumber;
+    localScenes[sceneNumber].SetActive(true);
+    activeLocalScene = sceneNumber;
 
-        // Oculta elementos UI
-        UpdateHintBox(null);
-        UpdateNameTag(null);
+    // Oculta elementos UI
+    UpdateHintBox(null);
+    UpdateNameTag(null);
+    equipmentCanvas.SetActive(true);
 
-        // Reactiva canvas de equipo
-        equipmentCanvas.SetActive(true);
+    isChangingScene = false;
+}
 
-        // Fade out: vuelve a mostrar la escena
-        while (blockingImage.color.a > 0)
-        {
-            c.a -= Time.deltaTime;
-            blockingImage.color = c;
-        }
 
-        blockingImage.enabled = false;
-        yield return null;
-    }
 
     public void StartDialogue(List<string> lines)
     {
@@ -271,7 +305,18 @@ public class GameManager : MonoBehaviour
         if (isDialogueActive && Input.GetMouseButtonDown(0)) // clic izquierdo
         {
             AdvanceDialogue();
-        }
-    }
+        }
+    }
+
+    public static bool PlayerHasItem(int itemID)
+    {
+        foreach (ItemData item in collectedItems)
+        {
+            if (item.itemID == itemID)
+                return true;
+        }
+        return false;
+    }
+
 
 }

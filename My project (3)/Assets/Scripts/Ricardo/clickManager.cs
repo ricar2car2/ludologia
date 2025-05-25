@@ -14,8 +14,7 @@ public class clickManager : MonoBehaviour
     private void Start()
     {
         // Busca una instancia del GameManager en la escena
-        gameManager = FindFirstObjectByType<GameManager>();
-        
+        gameManager = FindFirstObjectByType<GameManager>();        
 
     }
 
@@ -43,7 +42,7 @@ public class clickManager : MonoBehaviour
     public void ClickReaction(ItemData item)
 {
     // Verifica si el item puede recogerse (si no requiere otro objeto, o si se tiene el requerido)
-    bool canGetItem = item.requiredItemID == -1 || gameManager.SelectedItemID == item.requiredItemID;
+    bool canGetItem = item.requiredItemID == -1 || GameManager.PlayerHasItem(item.requiredItemID);
 
     if (item.isNPC && item.dialogue != null)
     {

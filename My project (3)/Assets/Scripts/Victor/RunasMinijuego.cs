@@ -3,13 +3,16 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 
 public class ButtonOrderGame : MonoBehaviour
 {
     public Button[] bottomButtons; // Los 4 botones en la parte inferior
     public TMP_Text resultText;
 
-    private List<int> correctOrder = new List<int> { 0, 1, 2, 3 }; // Índice de orden correcto
+    GameManager gameManager;
+
+    private List<int> correctOrder = new List<int> { 0, 1, 2, 3 }; // ï¿½ndice de orden correcto
     private List<int> selectedOrder = new List<int>();
 
     void Start()
@@ -18,6 +21,7 @@ public class ButtonOrderGame : MonoBehaviour
         {
             int index = i;
             bottomButtons[i].onClick.AddListener(() => OnButtonPressed(index));
+            gameManager = FindFirstObjectByType<GameManager>();   
         }
 
         resultText.text = "";
@@ -30,7 +34,7 @@ public class ButtonOrderGame : MonoBehaviour
 
         selectedOrder.Add(index);
 
-        // Desactiva el botón para evitar múltiples clics
+        // Desactiva el botï¿½n para evitar mï¿½ltiples clics
         bottomButtons[index].interactable = false;
 
         if (selectedOrder.Count == 4)
@@ -41,7 +45,13 @@ public class ButtonOrderGame : MonoBehaviour
     {
         if (correctOrder.SequenceEqual(selectedOrder))
         {
-            resultText.text = "¡Ganaste! Orden correcto.";
+            resultText.text = "ï¿½Ganaste! Orden correcto.";
+            if (gameManager != null)
+            {
+                gameManager.puzzleBotonesResuelto = true;
+                gameManager.StartCoroutine(gameManager.ChangeScene(5, 2));
+            }
+
         }
         else
         {
