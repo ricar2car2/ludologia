@@ -10,8 +10,14 @@ public class ItemData : MonoBehaviour
     [Header("Exito")]
 
     // Objetos que se deben desactivar o activar si el item es recogido exitosamente
-    public GameObject[] objectsToRemove;
-    public GameObject[] objectsToSetActive;
+    public GameObject[] objectsToRemove = new GameObject[0];
+    public GameObject[] objectsToSetActive = new GameObject[0];
+
+    [Header("Inactivar objetos después del diálogo (solo ocultar visualmente)")]
+    public GameObject[] objectsToInactivate = new GameObject[0];
+
+
+    
 
     // Sprite que representa este item en el equipo
     public Sprite itemSlotSprite;

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System; // Para System.Action
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
@@ -39,15 +40,16 @@ public class GameManager : MonoBehaviour
     int currentLineIndex = 0;
     public bool isDialogueActive = false;
 
+    private Action onDialogueComplete;
+
+
 
     [Header("Cambio de objetos permanentes")]
     public bool puzzleBotonesResuelto = false;
 
     public bool puzzleNumerosResuelto = false;
 
-
-
-
+    public bool puzzleColoresResuelto = false;
 
 
     private void Awake()
@@ -251,22 +253,24 @@ public IEnumerator ChangeScene(int sceneNumber, float delay)
 
 
 
-    public void StartDialogue(List<string> lines)
+    public void StartDialogue(List<string> lines, Action onComplete = null)
+{
+    if (isDialogueActive) return;
+
+    if (lines == null || lines.Count == 0)
     {
-        if (isDialogueActive) return; // evitar iniciar dos veces
-
-        if (lines == null || lines.Count == 0)
-        {
-            Debug.LogWarning("Diálogo vacío o nulo.");
-            return;
-        }
-
-        currentLines = lines;
-        currentLineIndex = 0;
-        isDialogueActive = true;
-        dialogueBox.SetActive(true);
-        ShowCurrentLine();
+        Debug.LogWarning("Diálogo vacío o nulo.");
+        return;
     }
+
+    currentLines = lines;
+    currentLineIndex = 0;
+    isDialogueActive = true;
+    dialogueBox.SetActive(true);
+    onDialogueComplete = onComplete; // <- Guardamos la acción
+    ShowCurrentLine();
+}
+
 
 
     void ShowCurrentLine()
@@ -296,7 +300,11 @@ public IEnumerator ChangeScene(int sceneNumber, float delay)
         isDialogueActive = false;
         dialogueBox.SetActive(false);
         currentLines = null;
+
+        onDialogueComplete?.Invoke(); // <- Ejecuta la acción si no es null
+        onDialogueComplete = null;
     }
+
 
 
     private void Update()

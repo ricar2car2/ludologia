@@ -46,9 +46,34 @@ public class clickManager : MonoBehaviour
 
     if (item.isNPC && item.dialogue != null)
     {
-        gameManager.StartDialogue(item.dialogue);
+        gameManager.StartDialogue(item.dialogue, () =>
+        {
+            // Activar objetos
+            foreach (GameObject obj in item.objectsToSetActive)
+            {
+                if (obj != null)
+                    obj.SetActive(true);
+            }
+
+            // Desactivar permanentemente (e.g. sprites de ítems recogidos)
+            foreach (GameObject obj in item.objectsToRemove)
+            {
+                if (obj != null)
+                    obj.SetActive(false);
+            }
+
+            // Inactivar visualmente (sin borrarlos lógicamente)
+            foreach (GameObject obj in item.objectsToInactivate)
+            {
+                if (obj != null)
+                    obj.SetActive(false);
+            }
+        });
         return;
     }
+
+
+
 
     if (canGetItem)
     {

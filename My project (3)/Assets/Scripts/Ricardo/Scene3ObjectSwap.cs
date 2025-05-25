@@ -5,7 +5,9 @@ public class ObjectReplacer : MonoBehaviour
     public enum PuzzleCondition
     {
         PuzzleBotones,
-        PuzzleNumeros
+        PuzzleNumeros,
+
+        PuzzleColores
         // Agrega más aquí si añades nuevos bools
     }
 
@@ -31,7 +33,11 @@ public class ObjectReplacer : MonoBehaviour
             case PuzzleCondition.PuzzleNumeros:
                 conditionMet = GameManager.Instance.puzzleNumerosResuelto;
                 break;
+            case PuzzleCondition.PuzzleColores:
+                conditionMet = GameManager.Instance.puzzleNumerosResuelto;
+                break;
         }
+        
 
         if (conditionMet)
         {

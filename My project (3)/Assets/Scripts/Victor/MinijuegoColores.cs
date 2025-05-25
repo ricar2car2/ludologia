@@ -9,8 +9,11 @@ public class ColorSelector : MonoBehaviour
     public Button[] colorButtons; // Asigna los 8 botones desde el inspector
     public TMP_Text resultText; // Asigna el TMP_Text desde el inspector
 
-    private List<int> correctIndexes = new List<int> { 1, 2, 5, 6 }; // Ajusta estos índices a los correctos
+    private List<int> correctIndexes = new List<int> { 1, 2, 5, 6 }; // Ajusta estos ï¿½ndices a los correctos
     private List<int> selectedIndexes = new List<int>();
+
+    GameManager gameManager;
+
 
     void Start()
     {
@@ -18,6 +21,8 @@ public class ColorSelector : MonoBehaviour
         {
             int index = i;
             colorButtons[i].onClick.AddListener(() => OnColorSelected(index));
+            gameManager = FindFirstObjectByType<GameManager>();   
+
         }
 
         resultText.text = "";
@@ -42,11 +47,13 @@ public class ColorSelector : MonoBehaviour
 
         if (correct.SequenceEqual(selected))
         {
-            resultText.text = "¡Que buena elección brother! Así da gusto vandalizar la propiedad pública";
+            resultText.text = "ï¿½Que buena elecciï¿½n brother! Asï¿½ da gusto vandalizar la propiedad pï¿½blica";
+            gameManager.puzzleColoresResuelto = true;
+            gameManager.StartCoroutine(gameManager.ChangeScene(5, 2));
         }
         else
         {
-            resultText.text = "Vaya combinación de mierda hermano, da igual el mensaje, con estos colores no llegamos a ningún lado";
+            resultText.text = "Vaya combinaciï¿½n de mierda hermano, da igual el mensaje, con estos colores no llegamos a ningï¿½n lado";
             Invoke("ResetGame", 2f); // Espera 2 segundos antes de reiniciar
         }
     }
