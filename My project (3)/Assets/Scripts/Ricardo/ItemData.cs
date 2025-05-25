@@ -49,9 +49,14 @@ public class ItemData : MonoBehaviour
     [TextArea(3, 3)]
     public string hintMessage;
 
-    [Header("Dialogo")]
-    [TextArea(2, 4)]
-    public List<string> dialogue;
+   [Header("Diálogo")]
+    [TextArea(4, 10)]
+    public string allDialoguesInPhases;
+
+    [HideInInspector]
+    public int currentDialoguePhase = 0;
+
+
 
     // Tamano del cuadro de texto del hint
     public Vector2 hintBoxSize = new Vector2(4, 0.65f);

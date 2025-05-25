@@ -49,7 +49,7 @@ public class ColorSelector : MonoBehaviour
         {
             resultText.text = "�Que buena elecci�n brother! As� da gusto vandalizar la propiedad p�blica";
             gameManager.puzzleColoresResuelto = true;
-            gameManager.StartCoroutine(gameManager.ChangeScene(15, 2));
+            gameManager.StartCoroutine(gameManager.ChangeScene(14, 2));
         }
         else
         {

@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -48,32 +49,35 @@ public class clickManager : MonoBehaviour
     // Verifica si el item puede recogerse (si no requiere otro objeto, o si se tiene el requerido)
     bool canGetItem = item.requiredItemID == -1 || GameManager.PlayerHasItem(item.requiredItemID);
 
-    if (item.isNPC && item.dialogue != null)
+    if (item.isNPC && !string.IsNullOrEmpty(item.allDialoguesInPhases))
 {
-    gameManager.StartDialogue(item.dialogue, () =>
-    {
-        // Activar objetos
+    // Separar fases por "---" o línea vacía
+    string[] dialoguePhases = item.allDialoguesInPhases.Split(new string[] { "---" }, System.StringSplitOptions.RemoveEmptyEntries);
+int phaseIndex = Mathf.Clamp(item.currentDialoguePhase, 0, dialoguePhases.Length - 1);
+string currentPhaseText = dialoguePhases[phaseIndex].Trim();
+
+// Parsear bloques según cambio de personaje
+List<string> blocks = ParseDialogueBlocks(currentPhaseText);
+
+// Mostrar bloques tal como están escritos
+GameManager.Instance.StartDialogue(blocks, () =>
+{
+    item.currentDialoguePhase++;
+
+    // Acciones después del diálogo si quieres...
+
+
+
+        // Activar, desactivar o cambiar escena si aplica
         foreach (GameObject obj in item.objectsToSetActive)
-        {
-            if (obj != null && gameManager.IsInActiveScene(obj))
-                obj.SetActive(true);
-        }
+            if (obj != null) obj.SetActive(true);
 
-        // Desactivar permanentemente (como ítems recogidos)
         foreach (GameObject obj in item.objectsToRemove)
-        {
-            if (obj != null && gameManager.IsInActiveScene(obj))
-                obj.SetActive(false);
-        }
+            if (obj != null) obj.SetActive(false);
 
-        // Inactivar visualmente (solo ocultar)
         foreach (GameObject obj in item.objectsToInactivate)
-        {
-            if (obj != null && gameManager.IsInActiveScene(obj))
-                obj.SetActive(false);
-        }
+            if (obj != null) obj.SetActive(false);
 
-        // 🔥 Cambio de escena después del diálogo
         if (item.changeSceneAfterDialogue && item.targetSceneIndex >= 0)
         {
             gameManager.StartCoroutine(gameManager.ChangeScene(item.targetSceneIndex, 0.3f));
@@ -83,25 +87,65 @@ public class clickManager : MonoBehaviour
     return;
 }
 
+List<string> ParseDialogueBlocks(string rawText)
+{
+    List<string> blocks = new List<string>();
 
+    string[] lines = rawText.Split(new[] { '\n' }, System.StringSplitOptions.RemoveEmptyEntries);
+    if (lines.Length == 0) return blocks;
 
+    string currentSpeaker = null;
+    string currentBlock = "";
 
-
-    if (canGetItem)
+    foreach (string line in lines)
     {
-        // Oculta el nameTag antes de recoger el objeto
-        gameManager.nameTag.gameObject.SetActive(false);
-        gameManager.currentItemShown = null;
+        string trimmed = line.Trim();
+        if (string.IsNullOrEmpty(trimmed)) continue;
 
-        StartCoroutine(HandleItemClick(item));
+        // Detecta cambio de hablante si hay ":"
+        int colonIndex = trimmed.IndexOf(':');
+        if (colonIndex > 0)
+        {
+            string speaker = trimmed.Substring(0, colonIndex).Trim();
+
+            if (speaker != currentSpeaker)
+            {
+                // Si cambia el hablante, guarda bloque anterior
+                if (!string.IsNullOrEmpty(currentBlock))
+                {
+                    blocks.Add(currentBlock.Trim());
+                    currentBlock = "";
+                }
+
+                currentSpeaker = speaker;
+            }
+        }
+
+        currentBlock += trimmed + "\n";
     }
-    else
-    {
-        // Si no se puede recoger, muestra hint explicativo y nombre
-        gameManager.UpdateHintBox(item);
-        gameManager.UpdateNameTag(item);
-        gameManager.currentItemShown = item;
-    }
+
+    // Agrega el último bloque
+    if (!string.IsNullOrEmpty(currentBlock))
+        blocks.Add(currentBlock.Trim());
+
+    return blocks;
+}
+
+        if (canGetItem)
+        {
+            // Oculta el nameTag antes de recoger el objeto
+            gameManager.nameTag.gameObject.SetActive(false);
+            gameManager.currentItemShown = null;
+
+            StartCoroutine(HandleItemClick(item));
+        }
+        else
+        {
+            // Si no se puede recoger, muestra hint explicativo y nombre
+            gameManager.UpdateHintBox(item);
+            gameManager.UpdateNameTag(item);
+            gameManager.currentItemShown = item;
+        }
 
     // Verifica condiciones especiales (como cambio de escena)
     gameManager.CheckSpecialConditions(item, canGetItem);

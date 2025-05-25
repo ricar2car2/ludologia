@@ -24,34 +24,56 @@ public class AutoItemDialogue : MonoBehaviour
 
     private IEnumerator TriggerDialogueWhenReady()
     {
-        // Espera a que el GameManager esté listo
+        // Esperar a que GameManager esté disponible
         while (GameManager.Instance == null)
             yield return null;
 
-        if (itemData == null || itemData.dialogue == null || itemData.dialogue.Count == 0)
+        if (itemData == null || string.IsNullOrEmpty(itemData.allDialoguesInPhases))
         {
-            Debug.LogWarning($"[AutoItemDialogue] No hay diálogo asignado en {gameObject.name}");
+            Debug.LogWarning($"[AutoItemDialogue] No hay diálogo válido en '{gameObject.name}'.");
             yield break;
         }
 
         string uniqueKey = "AutoDialogue_" + gameObject.name;
 
-        // Verificar si ya se activó este diálogo
+        // Ya fue activado (persistente)
         if (persistTrigger && PlayerPrefs.GetInt(uniqueKey, 0) == 1)
             yield break;
 
+        // Ya fue activado (en esta sesión)
         if (triggerOncePerSession && triggeredSessionKeys.Contains(uniqueKey))
             yield break;
 
-        // Iniciar diálogo
-        GameManager.Instance.StartDialogue(itemData.dialogue);
-        Debug.Log($"[AutoItemDialogue] Diálogo activado en {gameObject.name}");
+        // Separar en fases
+        string[] dialogueSections = itemData.allDialoguesInPhases.Split(new string[] { "---" }, System.StringSplitOptions.RemoveEmptyEntries);
+        int phaseIndex = Mathf.Clamp(itemData.currentDialoguePhase, 0, dialogueSections.Length - 1);
+        List<string> lines = new List<string>(dialogueSections[phaseIndex].Trim().Split('\n'));
 
-        // Marcar como ya mostrado
+        // Iniciar diálogo
+        GameManager.Instance.StartDialogue(lines, () =>
+        {
+            itemData.currentDialoguePhase++;
+
+            if (itemData.changeSceneAfterDialogue && itemData.targetSceneIndex >= 0)
+                GameManager.Instance.StartCoroutine(GameManager.Instance.ChangeScene(itemData.targetSceneIndex, 0.3f));
+
+            foreach (GameObject obj in itemData.objectsToSetActive)
+                if (obj != null) obj.SetActive(true);
+
+            foreach (GameObject obj in itemData.objectsToRemove)
+                if (obj != null) obj.SetActive(false);
+
+            foreach (GameObject obj in itemData.objectsToInactivate)
+                if (obj != null) obj.SetActive(false);
+        });
+
+        Debug.Log($"[AutoItemDialogue] Diálogo activado en '{gameObject.name}'");
+
+        // Guardar estado
         if (persistTrigger)
             PlayerPrefs.SetInt(uniqueKey, 1);
 
         if (triggerOncePerSession)
             triggeredSessionKeys.Add(uniqueKey);
-    }
+    }
 }
