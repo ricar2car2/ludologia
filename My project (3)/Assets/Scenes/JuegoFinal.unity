@@ -1029,6 +1029,7 @@ MonoBehaviour:
   requiredItemID: 0
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -1312,6 +1313,7 @@ MonoBehaviour:
   requiredItemID: 0
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -1642,6 +1644,7 @@ MonoBehaviour:
   - {fileID: 214713485}
   - {fileID: 1914891151}
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   isNPC: 0
   objectName: El Triangulo
@@ -2718,6 +2721,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -3047,6 +3051,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -3104,6 +3109,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -3161,6 +3167,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -3798,6 +3805,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -4643,6 +4651,7 @@ MonoBehaviour:
   isDialogueActive: 0
   puzzleBotonesResuelto: 0
   puzzleNumerosResuelto: 0
+  puzzleColoresResuelto: 0
 --- !u!1 &446076582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4692,6 +4701,7 @@ MonoBehaviour:
   requiredItemID: 0
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -5200,6 +5210,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -5363,6 +5374,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -5992,6 +6004,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -6291,6 +6304,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -6919,6 +6933,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -6985,6 +7000,7 @@ MonoBehaviour:
   requiredItemID: 0
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -7073,7 +7089,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &650408281
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7353,6 +7369,7 @@ MonoBehaviour:
   - {fileID: 693740722}
   - {fileID: 1570895601}
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   isNPC: 1
   objectName: Coldy
@@ -8989,6 +9006,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -9435,6 +9453,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -9821,6 +9840,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -10251,6 +10271,46 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 373670020}
     m_Modifications:
+    - target: {fileID: 1041591620744219184, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 135
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041591620744219184, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 137
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041591620744219184, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.0370001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041591620744219184, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.0370001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1041591620744219184, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.0370001
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095013026665112468, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1095013026665112468, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6283802744909198736, guid: 66da210ca055df041b049b046beb7957, type: 3}
+    - target: {fileID: 1947706792825693105, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1947706792825693105, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -3365208525762307394, guid: ea007a1cc1c24a647976eedfa36df7ba, type: 3}
+    - target: {fileID: 2073190000818416891, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1937200488000216356, guid: 0917c243022a49640a5355015b902c82, type: 3}
     - target: {fileID: 2326889029746066076, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 67.94507
@@ -10293,7 +10353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2546325901100862365, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2811411453360495434, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -10319,10 +10379,38 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3985697220976601862, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3985697220976601862, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6283802744909198736, guid: 66da210ca055df041b049b046beb7957, type: 3}
     - target: {fileID: 4292232947093337061, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: sliderValue
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4356377028780524770, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1937200488000216356, guid: 0917c243022a49640a5355015b902c82, type: 3}
+    - target: {fileID: 4550108443392959210, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4550108443392959210, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6283802744909198736, guid: 66da210ca055df041b049b046beb7957, type: 3}
+    - target: {fileID: 4632189199140462689, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4632189199140462689, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -6283802744909198736, guid: 66da210ca055df041b049b046beb7957, type: 3}
     - target: {fileID: 4839908214197541897, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -10377,19 +10465,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4945988523067923631, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4945988523067923631, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4945988523067923631, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5391560754544748592, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 1496792698588934080, guid: ff6a334eca44a244d963db2aba5793b6, type: 3}
     - target: {fileID: 5476983393811691375, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5702658978091927913, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_Color.a
@@ -10399,32 +10491,52 @@ PrefabInstance:
       propertyPath: mainMenuPanel
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 5884710931772447590, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Type
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5884710931772447590, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8958104599359837556, guid: 0ac5942686806d54cb150b2b362c462e, type: 3}
     - target: {fileID: 6465875981463143165, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6664846897959106623, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664846897959106623, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6664846897959106623, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7924354298024989903, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 52.8
       objectReference: {fileID: 0}
     - target: {fileID: 8062178637006477078, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8298920360983128671, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -8055949397810846296, guid: ff6a334eca44a244d963db2aba5793b6, type: 3}
     - target: {fileID: 8707738977702309807, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5125531484271662227, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+    - {fileID: 5742697747155596466, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+    - {fileID: 3506623535079059970, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
+    - {fileID: 4044013679073416231, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a55069ee4e57b18489131a87fb25546a, type: 3}
@@ -12018,6 +12130,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -12075,6 +12188,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -12389,6 +12503,7 @@ MonoBehaviour:
   - {fileID: 1392874394}
   - {fileID: 1599060521}
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   isNPC: 0
   objectName: El Triangulo
@@ -12939,6 +13054,7 @@ MonoBehaviour:
   - {fileID: 1433350979}
   - {fileID: 2112486353}
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
   isNPC: 0
   objectName: El Triangulo
@@ -13160,6 +13276,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -13911,6 +14028,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -15061,6 +15179,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -15760,6 +15879,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -16070,6 +16190,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -16581,6 +16702,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: 
@@ -17077,6 +17199,7 @@ MonoBehaviour:
   requiredItemID: -100
   objectsToRemove: []
   objectsToSetActive: []
+  objectsToInactivate: []
   itemSlotSprite: {fileID: 0}
   isNPC: 0
   objectName: Tienda
