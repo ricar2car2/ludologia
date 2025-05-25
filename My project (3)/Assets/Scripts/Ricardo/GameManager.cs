@@ -51,6 +51,19 @@ public class GameManager : MonoBehaviour
 
     public bool puzzleColoresResuelto = false;
 
+    /// <summary>
+/// Verifica si el objeto pertenece al contenedor de la escena activa.
+/// </summary>
+public bool IsInActiveScene(GameObject obj)
+{
+    if (obj == null || localScenes == null || activeLocalScene >= localScenes.Length)
+        return false;
+
+    // Compara si el objeto está dentro del contenedor activo
+    return obj.transform.IsChildOf(localScenes[activeLocalScene].transform);
+}
+
+
 
     private void Awake()
     {
@@ -217,6 +230,14 @@ public class GameManager : MonoBehaviour
             case -1400:
                 // Cambia a escena 4
                 StartCoroutine(ChangeScene(13, 0));
+                break;
+            case -1500:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(14, 0));
+                break;
+            case -1600:
+                // Cambia a escena 4
+                StartCoroutine(ChangeScene(15, 0));
                 break;
 
             case -1:

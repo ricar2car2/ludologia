@@ -16,8 +16,13 @@ public class ItemData : MonoBehaviour
     [Header("Inactivar objetos después del diálogo (solo ocultar visualmente)")]
     public GameObject[] objectsToInactivate = new GameObject[0];
 
+    [Header("Cambio de escena después del diálogo")]
+    public bool changeSceneAfterDialogue = false;
+    public int targetSceneIndex = -1;  // Usa -1 para indicar que no se quiere cambiar escena
 
-    
+
+
+
 
     // Sprite que representa este item en el equipo
     public Sprite itemSlotSprite;
@@ -49,7 +54,7 @@ public class ItemData : MonoBehaviour
     public List<string> dialogue;
 
     // Tamano del cuadro de texto del hint
-    public Vector2 hintBoxSize = new Vector2(4, 0.65f);
+    public Vector2 hintBoxSize = new Vector2(4, 0.65f);
 
 
 }

@@ -10,13 +10,17 @@ public class clickManager : MonoBehaviour
 {
     GameManager gameManager;
     SceneManager scene;
+    
+
 
     private void Start()
     {
         // Busca una instancia del GameManager en la escena
-        gameManager = FindFirstObjectByType<GameManager>();        
+        gameManager = FindFirstObjectByType<GameManager>();
 
     }
+
+    
 
     private void Update()
     {
@@ -45,32 +49,40 @@ public class clickManager : MonoBehaviour
     bool canGetItem = item.requiredItemID == -1 || GameManager.PlayerHasItem(item.requiredItemID);
 
     if (item.isNPC && item.dialogue != null)
+{
+    gameManager.StartDialogue(item.dialogue, () =>
     {
-        gameManager.StartDialogue(item.dialogue, () =>
+        // Activar objetos
+        foreach (GameObject obj in item.objectsToSetActive)
         {
-            // Activar objetos
-            foreach (GameObject obj in item.objectsToSetActive)
-            {
-                if (obj != null)
-                    obj.SetActive(true);
-            }
+            if (obj != null && gameManager.IsInActiveScene(obj))
+                obj.SetActive(true);
+        }
 
-            // Desactivar permanentemente (e.g. sprites de ítems recogidos)
-            foreach (GameObject obj in item.objectsToRemove)
-            {
-                if (obj != null)
-                    obj.SetActive(false);
-            }
+        // Desactivar permanentemente (como ítems recogidos)
+        foreach (GameObject obj in item.objectsToRemove)
+        {
+            if (obj != null && gameManager.IsInActiveScene(obj))
+                obj.SetActive(false);
+        }
 
-            // Inactivar visualmente (sin borrarlos lógicamente)
-            foreach (GameObject obj in item.objectsToInactivate)
-            {
-                if (obj != null)
-                    obj.SetActive(false);
-            }
-        });
-        return;
-    }
+        // Inactivar visualmente (solo ocultar)
+        foreach (GameObject obj in item.objectsToInactivate)
+        {
+            if (obj != null && gameManager.IsInActiveScene(obj))
+                obj.SetActive(false);
+        }
+
+        // 🔥 Cambio de escena después del diálogo
+        if (item.changeSceneAfterDialogue && item.targetSceneIndex >= 0)
+        {
+            gameManager.StartCoroutine(gameManager.ChangeScene(item.targetSceneIndex, 0.3f));
+        }
+    });
+
+    return;
+}
+
 
 
 
