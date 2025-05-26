@@ -161,12 +161,34 @@ public bool IsInActiveScene(GameObject obj)
             hintBox.gameObject.SetActive(false);
             return;
         }
+        if (string.IsNullOrWhiteSpace(item.hintMessage))
+            {
+                hintBox.gameObject.SetActive(false);
+                return;
+            }
+
 
         hintBox.gameObject.SetActive(true);
-        hintBox.GetComponentInChildren<TextMeshProUGUI>().text = item.hintMessage;
-        hintBox.sizeDelta = item.hintBoxSize;
-        hintBox.parent.localPosition = new Vector2(0, 0); // Posición por defecto
+
+        // Actualiza texto
+        var tmp = hintBox.GetComponentInChildren<TextMeshProUGUI>();
+        if (tmp != null)
+            tmp.text = item.hintMessage;
+
+        // Forzar layout una vez se haya activado y seteado el texto
+        StartCoroutine(ForceHintBoxLayout(item.hintBoxSize));
     }
+
+private IEnumerator ForceHintBoxLayout(Vector2 desiredSize)
+{
+    // Espera un frame para que el objeto se active
+    yield return null;
+
+    hintBox.sizeDelta = desiredSize;
+    LayoutRebuilder.ForceRebuildLayoutImmediate(hintBox);
+}
+
+
 
     public void CheckSpecialConditions(ItemData item, bool canGetItem)
     {

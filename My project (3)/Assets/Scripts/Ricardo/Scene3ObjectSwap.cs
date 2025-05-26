@@ -34,7 +34,7 @@ public class ObjectReplacer : MonoBehaviour
                 conditionMet = GameManager.Instance.puzzleNumerosResuelto;
                 break;
             case PuzzleCondition.PuzzleColores:
-                conditionMet = GameManager.Instance.puzzleNumerosResuelto;
+                conditionMet = GameManager.Instance.puzzleColoresResuelto;
                 break;
         }
         

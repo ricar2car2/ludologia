@@ -141,11 +141,22 @@ List<string> ParseDialogueBlocks(string rawText)
         }
         else
         {
-            // Si no se puede recoger, muestra hint explicativo y nombre
-            gameManager.UpdateHintBox(item);
+            // Decide si mostrar hintBox o usar diálogo largo
+            if (item.hintMessage.Length < 100 && !item.isNPC)
+            {
+                gameManager.UpdateHintBox(item); // Pista breve
+            }
+            else
+            {
+                // Tratar como diálogo aunque no sea NPC
+                List<string> longHint = new List<string> { item.hintMessage };
+                gameManager.StartDialogue(longHint); // Muestra en dialogueBox
+            }
+
             gameManager.UpdateNameTag(item);
             gameManager.currentItemShown = item;
         }
+
 
     // Verifica condiciones especiales (como cambio de escena)
     gameManager.CheckSpecialConditions(item, canGetItem);
